@@ -24,7 +24,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.5.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.6.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
@@ -52,6 +52,7 @@ public final class ElytraModule implements FlexModule {
         int trims = recipes.register();
         context.closeWith(recipes::unregister);
         context.listener(new RecipeReloadListener(recipes, context.log()));
+        context.listener(new de.raindancer.modules.elytra.speed.SpeedCapListener(() -> settings.current().maxSpeed()));
         if (trims == 0 || !recipes.allPresent()) {
             context.log().warn("No trim recipe for elytra is in the server's recipes ({} added) — the smithing "
                     + "table will not take an elytra.", trims);
