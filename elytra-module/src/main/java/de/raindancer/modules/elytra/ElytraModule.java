@@ -7,10 +7,13 @@ import de.raindancer.modules.api.ModuleInfo;
 import de.raindancer.modules.elytra.look.ElytraLook;
 import de.raindancer.modules.elytra.look.ElytraLooksDoor;
 import de.raindancer.modules.elytra.pack.ElytraPack;
+import de.raindancer.modules.elytra.prime.PrimeGate;
 import de.raindancer.modules.elytra.trim.ElytraTrimRecipes;
 import de.raindancer.modules.elytra.trim.RecipeReloadListener;
 import de.raindancer.modules.elytra.util.PermissionNodes;
 import org.bukkit.NamespacedKey;
+import de.raindancer.core.data.settings.SettingsStore;
+import de.raindancer.core.platform.util.Scheduling;
 import org.bukkit.Server;
 
 import java.util.List;
@@ -39,6 +42,10 @@ public final class ElytraModule implements FlexModule {
                 context.chat().brand()::chatPrefix);
         context.core().messages().seriousFrom(ElytraModule.class.getResourceAsStream("messages-serious.yml"));
         PermissionNodes.register(server);
+        SettingsStore<ElytraSettings> settings = context.settings(ElytraSettings.class, ElytraSettings.DEFAULTS);
+        PrimeGate.apply(server.getPluginManager(), settings.current().primeOnly());
+        settings.onChange(now -> Scheduling.global(context.plugin(),
+                () -> PrimeGate.apply(server.getPluginManager(), now.primeOnly())));
 
         ElytraTrimRecipes recipes = new ElytraTrimRecipes(server,
                 new NamespacedKey(context.plugin(), "elytra").getNamespace());
@@ -53,7 +60,8 @@ public final class ElytraModule implements FlexModule {
         ElytraPack.contribute(context.plugin(), context.core(), context.log());
         context.closeWith(() -> ElytraPack.withdraw(context.core()));
 
-        ElytraServices live = new ElytraServices(context.core().messages(), context.chat().brand());
+        ElytraServices live = new ElytraServices(context.core().messages(), context.chat().brand(),
+                () -> settings.current().primeOnly());
         services = live;
         // A door on the cosmetics page (Core 2.34.0); /elytra opens the same looks either way.
         try {
@@ -63,8 +71,8 @@ public final class ElytraModule implements FlexModule {
         } catch (LinkageError olderCore) {
             context.log().info("RainsCore is older than 2.34.0: the elytra looks are only in /elytra.");
         }
-        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks.", trims,
-                ElytraLook.values().length);
+        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks ({}).", trims,
+                ElytraLook.values().length, settings.current().primeOnly() ? "Prime only" : "for everybody");
     }
 
     @Override
@@ -72,8 +80,7 @@ public final class ElytraModule implements FlexModule {
         return List.of(ModuleCommand.of("elytra", "Picks a chestplate look for your elytra",
                         new ElytraCommand(ElytraModule::require))
                 .aliased("elytralook", "wings")
-                .taking("(nothing) — pick a look", "look <name> — put one on", "look none — plain wings again")
-                .needing(PermissionNodes.LOOKS));
+                .taking("(nothing) — pick a look", "look <name> — put one on", "look none — plain wings again"));
     }
 
     @Override

@@ -49,6 +49,8 @@ public final class LooksMenu extends PaginatedMenu<ElytraLook> {
     protected ItemStack icon(ElytraLook look) {
         boolean hasOne = ElytraLooks.find(viewer).isPresent();
         String state = current().filter(look::equals).isPresent() ? "<green>Your elytra wears it."
+                : !services.mayWear(viewer) ? (services.primeOnly().getAsBoolean() ? "<light_purple>A Prime perk."
+                : "<red>Not open to you here.")
                 : hasOne ? "<yellow>Click to put it on your elytra." : "<gray>Hold or wear an elytra to put it on.";
         return Icons.of(look.icon(), "<white>" + look.title() + " chestplate", List.of(
                 "<gray>The wings with a " + look.title().toLowerCase(java.util.Locale.ROOT) + " chestplate.",

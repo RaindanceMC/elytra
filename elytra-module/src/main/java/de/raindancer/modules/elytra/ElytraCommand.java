@@ -2,7 +2,6 @@ package de.raindancer.modules.elytra;
 
 import de.raindancer.modules.elytra.look.ElytraLook;
 import de.raindancer.modules.elytra.look.LooksMenu;
-import de.raindancer.modules.elytra.util.PermissionNodes;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.entity.Player;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/** {@code /elytra} opens the looks; {@code /elytra look <name|none>} puts one on without the menu. */
+/** {@code /elytra} opens the looks; {@code /elytra look <name|none>} puts one on without the menu. Open to all: who may wear one is {@link ElytraServices#mayWear}. */
 public final class ElytraCommand implements BasicCommand {
 
     private final Supplier<ElytraServices> services;
@@ -58,10 +57,5 @@ public final class ElytraCommand implements BasicCommand {
         }
         String typed = args.length == 0 ? "" : args[args.length - 1].toLowerCase(Locale.ROOT);
         return options.stream().filter(option -> option.startsWith(typed)).toList();
-    }
-
-    @Override
-    public String permission() {
-        return PermissionNodes.LOOKS;
     }
 }

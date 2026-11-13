@@ -4,7 +4,6 @@ import de.raindancer.core.ui.cosmetic.CosmeticDoor;
 import de.raindancer.core.ui.menu.Icons;
 import de.raindancer.core.ui.menu.Menu;
 import de.raindancer.modules.elytra.ElytraServices;
-import de.raindancer.modules.elytra.util.PermissionNodes;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -35,8 +34,10 @@ public final class ElytraLooksDoor implements CosmeticDoor {
 
     @Override
     public Optional<String> locked(Player viewer) {
-        return viewer.hasPermission(PermissionNodes.LOOKS) ? Optional.empty()
-                : Optional.of("Elytra looks are not open to you here.");
+        if (services.mayWear(viewer)) {
+            return Optional.empty();
+        }
+        return Optional.of(services.primeOnly().getAsBoolean() ? "A Prime perk" : "Not open to you here");
     }
 
     @Override

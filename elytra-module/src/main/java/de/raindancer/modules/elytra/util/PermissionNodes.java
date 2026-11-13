@@ -9,7 +9,7 @@ import java.util.List;
 /** Registered in code, since a hosted module has no descriptor. Trims need none: they are the smithing table's. */
 public final class PermissionNodes {
 
-    /** Putting a chestplate look on one's elytra. Everybody by default; take it away to make looks a reward. */
+    /** Putting a chestplate look on one's elytra. Its default and parents follow the prime-only setting (PrimeGate). */
     public static final String LOOKS = "rainselytra.looks";
 
     private PermissionNodes() {

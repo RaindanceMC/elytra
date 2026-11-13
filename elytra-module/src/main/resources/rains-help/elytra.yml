@@ -21,3 +21,4 @@ sections:
     text: |
       Hold or wear your elytra and type {run:/elytra}. Pick leather, chainmail, copper, iron, gold, diamond or netherite, and your wings are drawn with that chestplate. {cmd:/elytra look none} takes it off again.
       It is only a look: the elytra protects exactly like an elytra, not like the chestplate it shows. A trim shows on the chestplate part too.
+      {if:elytra:prime-only}Putting a look on is a <light_purple>Prime</light_purple> perk; everybody can look at them in the menu and take one off.{/if}
