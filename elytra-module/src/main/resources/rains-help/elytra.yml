@@ -1,5 +1,5 @@
 id: elytra
-title: Elytra trims & looks
+title: Elytra, horse armour & dog looks
 summary: Put an armour trim on your elytra at a smithing table, and give it a chestplate look with /elytra.
 intro: |
   Your wings deserve a little flair too. Trims go on exactly like they do on armour, and a chestplate look lets your elytra show off a diamond or netherite chestplate — only as a look.
@@ -16,6 +16,10 @@ sections:
     text: |
       Use a smithing table as you would for armour: a trim template, your elytra and a trim material (iron, gold, diamond, amethyst, …). The wings show the pattern in the material's colour, and enchantments and the name stay on.
       The server's resource pack draws the trim on the wings; without it the trim is still there and shows in the tooltip.
+  - question: Can my horse armour take a trim?
+    title: Horse armour trims
+    text: |
+      Yes, every horse armour (leather, copper, iron, gold, diamond, netherite) takes a trim at a smithing table, just like your own armour: a trim template, the horse armour and a trim material. Every pattern has its own design on the horse.
   - question: How do I get a chestplate look on my elytra?
     title: Chestplate looks
     text: |

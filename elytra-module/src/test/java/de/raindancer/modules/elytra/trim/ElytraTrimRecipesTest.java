@@ -33,4 +33,18 @@ class ElytraTrimRecipesTest {
         assertThat(ElytraTrimRecipes.twinKey(COAST, OURS, true, true)).as("a datapack already did it").isEmpty();
         assertThat(ElytraTrimRecipes.twinKey(COAST, OURS, false, false)).as("nothing to put on").isEmpty();
     }
+
+    @Test
+    @DisplayName("horse armour takes trims too: every horse armour as the base of a twin of its own, named horse/...")
+    void horseArmour() {
+        assertThat(TrimBase.HORSE.twinKey(COAST, OURS, true, false)).contains(
+                new NamespacedKey(OURS, "horse/minecraft/" + COAST.getKey()));
+        assertThat(TrimBase.ELYTRA.twinKey(COAST, OURS, true, false)).isEqualTo(
+                ElytraTrimRecipes.twinKey(COAST, OURS, true, false));
+        assertThat(TrimBase.HORSE.materials()).containsExactlyInAnyOrder(org.bukkit.Material.LEATHER_HORSE_ARMOR,
+                org.bukkit.Material.COPPER_HORSE_ARMOR, org.bukkit.Material.IRON_HORSE_ARMOR,
+                org.bukkit.Material.GOLDEN_HORSE_ARMOR, org.bukkit.Material.DIAMOND_HORSE_ARMOR,
+                org.bukkit.Material.NETHERITE_HORSE_ARMOR);
+        // which recipe bases count as taken needs a server's RecipeChoice: e2e ElytraScenarioTest smiths one
+    }
 }

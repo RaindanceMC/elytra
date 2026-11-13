@@ -3,6 +3,9 @@ https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytr
 Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,
 with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.
 
+Horse armour trims (textures/trims/entity/horse_body/*.png): our own, made by art/build-horse-trims.py from
+the game's trim motifs.
+
 Dog armour looks (textures/entity/equipment/wolf_body/dog_*.png), unchanged:
 - leather, copper, iron, gold, diamond, netherite: "Metal Wolf Solid: Wolf Armor & Stand" by LOREal,
   https://modrinth.com/mod/metal-wolf-solid-wolf-armor, source https://gitlab.com/LOREal_mods/mc-mws-wolf-armor-and-stand,

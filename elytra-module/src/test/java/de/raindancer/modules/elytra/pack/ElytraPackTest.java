@@ -147,4 +147,33 @@ class ElytraPackTest {
         assertThat(ROOT.resolve("licenses/LGPL-2.1.txt")).content().contains("LESSER GENERAL PUBLIC LICENSE");
         assertThat(ROOT.resolve("CREDITS.txt")).content().contains("Metal Wolf Solid").contains("More Wolf Armors");
     }
+
+    @Test
+    @DisplayName("every trim pattern has a horse armour texture: tinted through the palette, shaded, in the trim greys only")
+    void horseTrims() throws IOException {
+        java.util.Set<Integer> greys = java.util.Set.of(0xE0E0E0, 0xC0C0C0, 0xA0A0A0, 0x808080, 0x606060, 0x404040,
+                0x202020, 0x000000);
+        for (String pattern : PATTERNS) {
+            String texture = "assets/minecraft/textures/trims/entity/horse_body/" + pattern + ".png";
+            assertThat(json(texture + ".mcmeta").getAsJsonObject("palette").get("base_palette").getAsString())
+                    .as(pattern).isEqualTo("trim_base");
+            java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(ROOT.resolve(texture).toFile());
+            assertThat(image.getWidth()).isEqualTo(64);
+            assertThat(image.getHeight()).isEqualTo(64);
+            java.util.Set<Integer> shades = new java.util.TreeSet<>();
+            int drawn = 0;
+            for (int y = 0; y < 64; y++) {
+                for (int x = 0; x < 64; x++) {
+                    int argb = image.getRGB(x, y);
+                    if ((argb >>> 24) != 0) {
+                        shades.add(argb & 0xFFFFFF);
+                        drawn++;
+                    }
+                }
+            }
+            assertThat(shades).as(pattern + "'s greys").isSubsetOf(greys);
+            assertThat(shades.size()).as(pattern + " has depth").isGreaterThanOrEqualTo(3);
+            assertThat(drawn).as(pattern + " shows").isGreaterThan(60);
+        }
+    }
 }

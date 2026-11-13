@@ -122,6 +122,8 @@ def main(bare_bones, elytra_trims, mws_jar, more_wolf_jar, client_jar):
         "https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims, unchanged.\n"
         "Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,\n"
         "with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.\n\n"
+        "Horse armour trims (textures/trims/entity/horse_body/*.png): our own, made by art/build-horse-trims.py from\n"
+        "the game's trim motifs.\n\n"
         "Dog armour looks (textures/entity/equipment/wolf_body/dog_*.png), unchanged:\n"
         "- leather, copper, iron, gold, diamond, netherite: \"Metal Wolf Solid: Wolf Armor & Stand\" by LOREal,\n"
         "  https://modrinth.com/mod/metal-wolf-solid-wolf-armor, source https://gitlab.com/LOREal_mods/mc-mws-wolf-armor-and-stand,\n"

@@ -24,7 +24,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.4.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.5.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
@@ -81,7 +81,7 @@ public final class ElytraModule implements FlexModule {
         } catch (LinkageError olderCore) {
             context.log().info("RainsCore is older than 2.34.0: the elytra looks are only in /elytra.");
         }
-        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks and {} dog armour looks ({}).",
+        context.log().info("Elytra is up: {} trim recipes take an elytra or horse armour, {} chestplate looks and {} dog armour looks ({}).",
                 trims, ElytraLook.values().length, de.raindancer.modules.elytra.look.DogLook.values().length, settings.current().primeOnly() ? "Prime only" : "for everybody");
     }
 
