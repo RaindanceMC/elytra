@@ -17,8 +17,7 @@ public final class ElytraPack {
 
     public static final String ROOT = "/de/raindancer/modules/elytra/pack/";
     public static final List<String> FILES = List.of(
-            "licenses/GPL-3.0.txt",
-            "licenses/elytra-trims-LGPL-3.0.txt",
+            "CREDITS.txt",
             "assets/minecraft/atlases/items.json",
             "assets/minecraft/items/elytra.json",
             "assets/minecraft/textures/trims/entity/wings/bolt.png",
@@ -61,6 +60,13 @@ public final class ElytraPack {
             "assets/rainselytra/equipment/chainmail_chestplate.json",
             "assets/rainselytra/equipment/copper_chestplate.json",
             "assets/rainselytra/equipment/diamond_chestplate.json",
+            "assets/rainselytra/equipment/dog_copper.json",
+            "assets/rainselytra/equipment/dog_diamond.json",
+            "assets/rainselytra/equipment/dog_gilded.json",
+            "assets/rainselytra/equipment/dog_gold.json",
+            "assets/rainselytra/equipment/dog_iron.json",
+            "assets/rainselytra/equipment/dog_leather.json",
+            "assets/rainselytra/equipment/dog_netherite.json",
             "assets/rainselytra/equipment/gold_chestplate.json",
             "assets/rainselytra/equipment/iron_chestplate.json",
             "assets/rainselytra/equipment/leather_chestplate.json",
@@ -87,7 +93,18 @@ public final class ElytraPack {
             "assets/rainselytra/models/item/elytra_quartz_trim.json",
             "assets/rainselytra/models/item/elytra_redstone_trim.json",
             "assets/rainselytra/models/item/elytra_resin_trim.json",
-            "CREDITS.txt",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_copper.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_diamond.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_gilded.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_gilded_overlay.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_gold.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_iron.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_leather.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_leather_overlay.png",
+            "assets/rainselytra/textures/entity/equipment/wolf_body/dog_netherite.png",
+            "licenses/GPL-3.0.txt",
+            "licenses/LGPL-2.1.txt",
+            "licenses/elytra-trims-LGPL-3.0.txt",
             "pack.mcmeta");
     private static final String OWNER = "Elytra";
     private static final String NAME = "trims-and-looks";

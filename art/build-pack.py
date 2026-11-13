@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Writes the module's resource pack files from their two sources.
 
-  python3 -I art/build-pack.py <BareBonesXElytraTrims.zip> <elytratrims-fabric.jar> <minecraft-26.3-client.jar>
+  python3 -I art/build-pack.py <BareBonesXElytraTrims.zip> <elytratrims-fabric.jar> <mws.jar> <more_wolf_armors.jar> \
+      <minecraft-26.3-client.jar>
 
 - The wing trim textures come from the "Elytra Trims" mod by KikuGie (LGPL-3.0-or-later,
   https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims): one shaded pattern per
@@ -9,6 +10,11 @@
   the GPL it builds on go into the pack beside them (art/licenses/).
 - The item overlay comes from "Bare Bones X Elytra Trims" by rando3214 (BSD-2-Clause,
   https://modrinth.com/resourcepack/bare-bones-x-elytra-trims); its flat wing textures were the ones used up to 0.2.0.
+- The dog armour looks (Prime): leather, copper, iron, gold, diamond and netherite wolf body textures from
+  "Metal Wolf Solid: Wolf Armor & Stand" by LOREal (LGPL-2.1-or-later, https://modrinth.com/mod/metal-wolf-solid-wolf-armor,
+  source https://gitlab.com/LOREal_mods/mc-mws-wolf-armor-and-stand), and the gilded netherite one from "More Wolf
+  Armors" (LGPL-2.1-only, https://modrinth.com/mod/more-wolf-armors, source
+  https://github.com/Minecraft-LightLand/More-Wolf-Armors). Unchanged; the LGPL 2.1 text goes in the pack.
 - The chestplate looks reuse the game's own armour textures: each look is the vanilla chestplate's humanoid layers
   (with its trim overrides) plus the elytra's wings, so nothing of Mojang's is copied, only referred to.
 """
@@ -32,7 +38,29 @@ def write(path, data):
     target.write_bytes(data.encode() if isinstance(data, str) else data)
 
 
-def main(bare_bones, elytra_trims, client_jar):
+DOG_WOLF = "assets/mws/textures/entity/equipment/wolf_body/"
+DOG_GILDED = "assets/minecraft/textures/entity/wolf/armor/"
+DOG_OUT = f"assets/{NS}/textures/entity/equipment/wolf_body/"
+
+
+def dog_looks(mws_jar, more_wolf_jar):
+    """One equipment asset per dog look: rainselytra:dog_<id>, the wolf body layer only."""
+    with zipfile.ZipFile(mws_jar) as mws, zipfile.ZipFile(more_wolf_jar) as more:
+        for material in ("leather", "copper", "iron", "gold", "diamond", "netherite"):
+            write(DOG_OUT + f"dog_{material}.png", mws.read(DOG_WOLF + f"{material}.png"))
+            layers = [{"texture": f"{NS}:dog_{material}"}]
+            if material == "leather":
+                write(DOG_OUT + "dog_leather_overlay.png", mws.read(DOG_WOLF + "leather_overlay.png"))
+                layers.append({"dyeable": {}, "texture": f"{NS}:dog_leather_overlay"})
+            write(f"assets/{NS}/equipment/dog_{material}.json", {"layers": {"wolf_body": layers}})
+        write(DOG_OUT + "dog_gilded.png", more.read(DOG_GILDED + "netherite.png"))
+        write(DOG_OUT + "dog_gilded_overlay.png", more.read(DOG_GILDED + "netherite_overlay.png"))
+        write(f"assets/{NS}/equipment/dog_gilded.json", {"layers": {"wolf_body": [
+            {"texture": f"{NS}:dog_gilded"}, {"texture": f"{NS}:dog_gilded_overlay"}]}})
+
+
+def main(bare_bones, elytra_trims, mws_jar, more_wolf_jar, client_jar):
+    dog_looks(mws_jar, more_wolf_jar)
     with zipfile.ZipFile(bare_bones) as pack, zipfile.ZipFile(elytra_trims) as kiku, zipfile.ZipFile(client_jar) as game:
         patterns = sorted(Path(n).stem for n in kiku.namelist() if n.startswith(WINGS) and n.endswith(".png"))
         vanilla = sorted(Path(n).stem for n in game.namelist()
@@ -87,13 +115,20 @@ def main(bare_bones, elytra_trims, client_jar):
 
     write("pack.mcmeta", {"pack": {"description": "Rain's Elytra — trims and chestplate looks on elytra",
                                    "min_format": 97, "max_format": 97}})
-    for licence in ("elytra-trims-LGPL-3.0.txt", "GPL-3.0.txt"):
+    for licence in ("elytra-trims-LGPL-3.0.txt", "GPL-3.0.txt", "LGPL-2.1.txt"):
         write("licenses/" + licence, (Path(__file__).resolve().parent / "licenses" / licence).read_text())
     write("CREDITS.txt", (
         "Wing trim textures (textures/trims/entity/wings/*.png): from the \"Elytra Trims\" mod by KikuGie,\n"
         "https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims, unchanged.\n"
         "Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,\n"
         "with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.\n\n"
+        "Dog armour looks (textures/entity/equipment/wolf_body/dog_*.png), unchanged:\n"
+        "- leather, copper, iron, gold, diamond, netherite: \"Metal Wolf Solid: Wolf Armor & Stand\" by LOREal,\n"
+        "  https://modrinth.com/mod/metal-wolf-solid-wolf-armor, source https://gitlab.com/LOREal_mods/mc-mws-wolf-armor-and-stand,\n"
+        "  GNU Lesser General Public License v2.1 or later.\n"
+        "- gilded: the netherite wolf armour of \"More Wolf Armors\", https://modrinth.com/mod/more-wolf-armors,\n"
+        "  source https://github.com/Minecraft-LightLand/More-Wolf-Armors, GNU Lesser General Public License v2.1.\n"
+        "  Licence text: licenses/LGPL-2.1.txt.\n\n"
         "The elytra trim overlay (textures/trims/items/wings_trim.png): \"Bare Bones X Elytra Trims\" by rando3214,\n"
         "https://modrinth.com/resourcepack/bare-bones-x-elytra-trims — BSD 2-Clause License:\n\n"
         "Redistribution and use in source and binary forms, with or without modification, are permitted provided\n"
@@ -114,6 +149,6 @@ def main(bare_bones, elytra_trims, client_jar):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 6:
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    main(*sys.argv[1:6])

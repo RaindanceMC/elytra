@@ -1,0 +1,12 @@
+{
+  "layers": {
+    "wolf_body": [
+      {
+        "texture": "rainselytra:dog_gilded"
+      },
+      {
+        "texture": "rainselytra:dog_gilded_overlay"
+      }
+    ]
+  }
+}

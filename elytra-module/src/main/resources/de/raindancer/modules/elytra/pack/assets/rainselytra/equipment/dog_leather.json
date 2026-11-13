@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "wolf_body": [
+      {
+        "texture": "rainselytra:dog_leather"
+      },
+      {
+        "dyeable": {},
+        "texture": "rainselytra:dog_leather_overlay"
+      }
+    ]
+  }
+}
