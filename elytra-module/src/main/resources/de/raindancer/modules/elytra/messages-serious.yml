@@ -1,0 +1,3 @@
+# The serious wording for this module: only the lines that differ from messages.yml.
+elytra:
+  look-on: "<green>Elytra look set: <white><look></white> chestplate. It does not change the armour value."

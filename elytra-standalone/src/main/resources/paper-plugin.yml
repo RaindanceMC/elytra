@@ -1,0 +1,24 @@
+# Same shape as every other standalone here — see rtp-standalone's copy for why each line matters.
+name: ${plugin.name}
+version: '${plugin.version}'
+main: de.raindancer.modules.wrapper.ModulePlugin
+bootstrapper: de.raindancer.modules.wrapper.ModuleBootstrap
+api-version: '26.3'
+description: 'Armour trims on elytra, and chestplate looks for elytra.'
+author: Raindancer118
+website: https://github.com/RaindanceMC/elytra
+
+# Recipes are added once at startup; the looks change the item in the player's own hand.
+folia-supported: true
+
+dependencies:
+  bootstrap:
+    RainsCore:
+      load: BEFORE
+      required: true
+      join-classpath: true
+  server:
+    RainsCore:
+      load: BEFORE
+      required: true
+      join-classpath: true

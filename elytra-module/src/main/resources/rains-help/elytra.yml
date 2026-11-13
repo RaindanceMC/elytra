@@ -1,0 +1,23 @@
+id: elytra
+title: Elytra trims & looks
+summary: Put an armour trim on your elytra at a smithing table, and give it a chestplate look with /elytra.
+intro: |
+  Your wings deserve a little flair too. Trims go on exactly like they do on armour, and a chestplate look lets your elytra show off a diamond or netherite chestplate — only as a look.
+icon: ELYTRA
+category: Items & enchantments
+order: 45
+module: elytra
+aliases: [elytra, wings, elytralook, elytra-trims, elytra-looks]
+keywords: [elytra, wings, trim, trims, smithing, template, chestplate, look, cosmetic]
+commands: [elytra]
+sections:
+  - question: How do I put a trim on my elytra?
+    title: Trims
+    text: |
+      Use a smithing table as you would for armour: a trim template, your elytra and a trim material (iron, gold, diamond, amethyst, …). The wings show the pattern in the material's colour, and enchantments and the name stay on.
+      The server's resource pack draws the trim on the wings; without it the trim is still there and shows in the tooltip.
+  - question: How do I get a chestplate look on my elytra?
+    title: Chestplate looks
+    text: |
+      Hold or wear your elytra and type {run:/elytra}. Pick leather, chainmail, copper, iron, gold, diamond or netherite, and your wings are drawn with that chestplate. {cmd:/elytra look none} takes it off again.
+      It is only a look: the elytra protects exactly like an elytra, not like the chestplate it shows. A trim shows on the chestplate part too.
