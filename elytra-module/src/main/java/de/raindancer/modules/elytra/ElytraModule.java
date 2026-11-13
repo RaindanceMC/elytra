@@ -24,7 +24,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.1.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.2.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
@@ -63,6 +63,13 @@ public final class ElytraModule implements FlexModule {
         ElytraServices live = new ElytraServices(context.core().messages(), context.chat().brand(),
                 () -> settings.current().primeOnly());
         services = live;
+        // Every two seconds, on each player's own thread: a look stays only with somebody who may wear one.
+        var keeper = Scheduling.globalTimer(context.plugin(), 40, 40, task -> {
+            for (org.bukkit.entity.Player online : context.plugin().getServer().getOnlinePlayers()) {
+                Scheduling.entity(context.plugin(), online, () -> live.keepLooksAllowed(online));
+            }
+        });
+        context.closeWith(keeper::cancel);
         // A door on the cosmetics page (Core 2.34.0); /elytra opens the same looks either way.
         try {
             de.raindancer.core.ui.cosmetic.CosmeticDoor door = new ElytraLooksDoor(live);

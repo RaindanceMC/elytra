@@ -7,5 +7,7 @@ elytra:
   unknown-look: "<red>There is no look called <white><typed></white>. These are: <white><looks></white>, or <white>none</white>."
   only-a-player: "<red>Only a player wears an elytra."
   usage: "<gray>/elytra <dark_gray>— pick a look · <gray>/elytra look <white>name</white> | none"
+  look-lost-prime: "<light_purple>Your elytra look is a Prime perk,</light_purple> <gray>so your wings are plain again. /prime brings it back."
+  look-lost: "<gray>Your elytra look is no longer yours to wear, so your wings are plain again."
   prime-only: "<light_purple>Elytra looks are a Prime perk.</light_purple> <gray>Your elytra stays as it is; you can always take a look off."
   not-allowed: "<red>Elytra looks are not open to you here."

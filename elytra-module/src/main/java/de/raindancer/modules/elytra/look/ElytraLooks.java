@@ -42,6 +42,27 @@ public final class ElytraLooks {
         elytra.setData(DataComponentTypes.EQUIPPABLE, equippable.toBuilder().assetId(look.asset()).build());
     }
 
+    /**
+     * Takes the look off every elytra in an inventory — worn, in hand or packed away — for somebody no longer allowed
+     * one (Prime ended, or handed a styled elytra).
+     *
+     * @return how many came off
+     */
+    public static int takeOffAll(org.bukkit.inventory.Inventory inventory) {
+        ItemStack[] contents = inventory.getContents();
+        int off = 0;
+        for (int slot = 0; slot < contents.length; slot++) {
+            ItemStack item = contents[slot];
+            if (lookOf(item).isPresent()) {
+                ItemStack plain = item.clone();
+                wear(plain, null);
+                inventory.setItem(slot, plain);
+                off++;
+            }
+        }
+        return off;
+    }
+
     /** The elytra in the main hand, else the one worn. */
     public static Optional<Slot> find(Player player) {
         PlayerInventory inventory = player.getInventory();

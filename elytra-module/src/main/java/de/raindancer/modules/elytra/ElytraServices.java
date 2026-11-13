@@ -19,6 +19,16 @@ public record ElytraServices(Messages messages, Brand brand, BooleanSupplier pri
         return player.hasPermission(PermissionNodes.LOOKS);
     }
 
+    /** Looks only stay with whoever may wear them: anybody else's come off, and they are told once. */
+    public void keepLooksAllowed(Player player) {
+        if (mayWear(player)) {
+            return;
+        }
+        if (ElytraLooks.takeOffAll(player.getInventory()) > 0) {
+            messages.send(player, primeOnly.getAsBoolean() ? "elytra.look-lost-prime" : "elytra.look-lost");
+        }
+    }
+
     /** Puts {@code look} (null: none) on the player's elytra and tells them. */
     public void wear(Player player, ElytraLook look) {
         Optional<ElytraLooks.Slot> slot = ElytraLooks.find(player);
