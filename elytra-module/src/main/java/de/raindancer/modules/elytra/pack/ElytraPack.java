@@ -17,6 +17,8 @@ public final class ElytraPack {
 
     public static final String ROOT = "/de/raindancer/modules/elytra/pack/";
     public static final List<String> FILES = List.of(
+            "licenses/GPL-3.0.txt",
+            "licenses/elytra-trims-LGPL-3.0.txt",
             "assets/minecraft/atlases/items.json",
             "assets/minecraft/items/elytra.json",
             "assets/minecraft/textures/trims/entity/wings/bolt.png",

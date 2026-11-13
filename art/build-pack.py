@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Writes the module's resource pack files from their two sources.
 
-  python3 -I art/build-pack.py <BareBonesXElytraTrims.zip> <minecraft-26.3-client.jar>
+  python3 -I art/build-pack.py <BareBonesXElytraTrims.zip> <elytratrims-fabric.jar> <minecraft-26.3-client.jar>
 
-- The wing trim textures and the item overlay come from "Bare Bones X Elytra Trims" by rando3214 (BSD-2-Clause,
-  https://modrinth.com/resourcepack/bare-bones-x-elytra-trims). Its 1.21.4 core shaders are left out; 26.3 wants a
-  palette .mcmeta beside every trim texture, which it never had.
+- The wing trim textures come from the "Elytra Trims" mod by KikuGie (LGPL-3.0-or-later,
+  https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims): one shaded pattern per
+  trim, in the game's eight trim greys, so 26.3's palette .mcmeta tints them with depth. Unchanged; its licence and
+  the GPL it builds on go into the pack beside them (art/licenses/).
+- The item overlay comes from "Bare Bones X Elytra Trims" by rando3214 (BSD-2-Clause,
+  https://modrinth.com/resourcepack/bare-bones-x-elytra-trims); its flat wing textures were the ones used up to 0.2.0.
 - The chestplate looks reuse the game's own armour textures: each look is the vanilla chestplate's humanoid layers
   (with its trim overrides) plus the elytra's wings, so nothing of Mojang's is copied, only referred to.
 """
@@ -29,15 +32,15 @@ def write(path, data):
     target.write_bytes(data.encode() if isinstance(data, str) else data)
 
 
-def main(bare_bones, client_jar):
-    with zipfile.ZipFile(bare_bones) as pack, zipfile.ZipFile(client_jar) as game:
-        patterns = sorted(Path(n).stem for n in pack.namelist() if n.startswith(WINGS) and n.endswith(".png"))
+def main(bare_bones, elytra_trims, client_jar):
+    with zipfile.ZipFile(bare_bones) as pack, zipfile.ZipFile(elytra_trims) as kiku, zipfile.ZipFile(client_jar) as game:
+        patterns = sorted(Path(n).stem for n in kiku.namelist() if n.startswith(WINGS) and n.endswith(".png"))
         vanilla = sorted(Path(n).stem for n in game.namelist()
                          if n.startswith("assets/minecraft/textures/trims/entity/humanoid/") and n.endswith(".png"))
         if patterns != vanilla:
             sys.exit(f"the pack's wing patterns {patterns} are not the game's {vanilla}")
         for pattern in patterns:
-            write(WINGS + pattern + ".png", pack.read(WINGS + pattern + ".png"))
+            write(WINGS + pattern + ".png", kiku.read(WINGS + pattern + ".png"))
             write(WINGS + pattern + ".png.mcmeta", {"palette": {"base_palette": "trim_base"}})
         write(OVERLAY, pack.read(OVERLAY))
 
@@ -84,8 +87,14 @@ def main(bare_bones, client_jar):
 
     write("pack.mcmeta", {"pack": {"description": "Rain's Elytra — trims and chestplate looks on elytra",
                                    "min_format": 97, "max_format": 97}})
+    for licence in ("elytra-trims-LGPL-3.0.txt", "GPL-3.0.txt"):
+        write("licenses/" + licence, (Path(__file__).resolve().parent / "licenses" / licence).read_text())
     write("CREDITS.txt", (
-        "Wing trim textures and the elytra trim overlay: \"Bare Bones X Elytra Trims\" by rando3214,\n"
+        "Wing trim textures (textures/trims/entity/wings/*.png): from the \"Elytra Trims\" mod by KikuGie,\n"
+        "https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims, unchanged.\n"
+        "Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,\n"
+        "with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.\n\n"
+        "The elytra trim overlay (textures/trims/items/wings_trim.png): \"Bare Bones X Elytra Trims\" by rando3214,\n"
         "https://modrinth.com/resourcepack/bare-bones-x-elytra-trims — BSD 2-Clause License:\n\n"
         "Redistribution and use in source and binary forms, with or without modification, are permitted provided\n"
         "that the following conditions are met:\n"
@@ -105,6 +114,6 @@ def main(bare_bones, client_jar):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], sys.argv[3])

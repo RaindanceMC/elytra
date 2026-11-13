@@ -9,7 +9,7 @@ Part of [RaindanceMC](https://github.com/RaindanceMC); built on [RainsCore](http
 
 - **Trims:** every trim recipe the server has gets a twin with the elytra as base; the game's trim recipe never checks the base, so the smithing table works as for armour. Vanilla 26.3 already draws trims on the `wings` layer from `textures/trims/entity/wings/<pattern>.png` — the pack brings those.
 - **Looks:** an equipment asset per chestplate (`rainselytra:<material>_chestplate`: the vanilla chestplate's humanoid layers plus the elytra's wings); `/elytra` points the elytra's `equippable` asset at it. Armour points are untouched.
-- **Pack:** contributed to Core's resource pack via `JarPack`. Built by `art/build-pack.py` from *Bare Bones X Elytra Trims* by rando3214 (BSD-2-Clause, credits in the pack) and the game's own equipment JSONs.
+- **Pack:** contributed to Core's resource pack via `JarPack`. Built by `art/build-pack.py`: shaded wing trims from the *Elytra Trims* mod by KikuGie (LGPL-3.0-or-later, licence texts in the pack), the item overlay from *Bare Bones X Elytra Trims* by rando3214 (BSD-2-Clause), and the game's own equipment JSONs.
 
 ## Build
 
@@ -21,4 +21,4 @@ Needs Java 25 and read access to `packages.tstieh.de`. Real-server scenario: `El
 
 ## Plugins
 
-- `elytra-standalone/target/RainsElytra-0.1.0.jar` — also published as `de.raindancer.modules:elytra-standalone:0.1.0`
+- `elytra-standalone/target/RainsElytra-0.3.0.jar` — also published as `de.raindancer.modules:elytra-standalone:0.3.0`

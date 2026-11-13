@@ -1,4 +1,9 @@
-Wing trim textures and the elytra trim overlay: "Bare Bones X Elytra Trims" by rando3214,
+Wing trim textures (textures/trims/entity/wings/*.png): from the "Elytra Trims" mod by KikuGie,
+https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytra-trims, unchanged.
+Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,
+with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.
+
+The elytra trim overlay (textures/trims/items/wings_trim.png): "Bare Bones X Elytra Trims" by rando3214,
 https://modrinth.com/resourcepack/bare-bones-x-elytra-trims — BSD 2-Clause License:
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided
