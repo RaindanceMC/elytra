@@ -24,7 +24,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.6.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.7.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
