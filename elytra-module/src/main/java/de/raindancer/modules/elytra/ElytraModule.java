@@ -8,8 +8,6 @@ import de.raindancer.modules.elytra.look.ElytraLook;
 import de.raindancer.modules.elytra.look.ElytraLooksDoor;
 import de.raindancer.modules.elytra.pack.ElytraPack;
 import de.raindancer.modules.elytra.prime.PrimeGate;
-import de.raindancer.modules.elytra.trim.ElytraTrimRecipes;
-import de.raindancer.modules.elytra.trim.RecipeReloadListener;
 import de.raindancer.modules.elytra.util.PermissionNodes;
 import org.bukkit.NamespacedKey;
 import de.raindancer.core.data.settings.SettingsStore;
@@ -24,7 +22,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.7.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.8.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
@@ -47,12 +45,19 @@ public final class ElytraModule implements FlexModule {
         settings.onChange(now -> Scheduling.global(context.plugin(),
                 () -> PrimeGate.apply(server.getPluginManager(), now.primeOnly())));
 
-        ElytraTrimRecipes recipes = new ElytraTrimRecipes(server,
-                new NamespacedKey(context.plugin(), "elytra").getNamespace());
+        de.raindancer.core.content.items.TrimTwins recipes = new de.raindancer.core.content.items.TrimTwins(server,
+                new NamespacedKey(context.plugin(), "elytra").getNamespace(), "elytra", java.util.Set.of(org.bukkit.Material.ELYTRA));
         int trims = recipes.register();
         context.closeWith(recipes::unregister);
-        context.listener(new RecipeReloadListener(recipes, context.log()));
-        context.listener(new de.raindancer.modules.elytra.speed.SpeedCapListener(() -> settings.current().maxSpeed()));
+        context.listener(recipes.followReloads(n -> context.log().info("Datapacks reloaded: {} trim recipes take an elytra.", n)));
+        de.raindancer.modules.elytra.rocket.FlightLimit limit =
+                new de.raindancer.modules.elytra.rocket.FlightLimit(context.plugin(), () -> settings.current().maxSpeed());
+        context.listener(limit);
+        var keeping = limit.start();
+        context.closeWith(() -> {
+            keeping.cancel();
+            limit.stop();
+        });
         if (trims == 0 || !recipes.allPresent()) {
             context.log().warn("No trim recipe for elytra is in the server's recipes ({} added) — the smithing "
                     + "table will not take an elytra.", trims);
@@ -82,7 +87,7 @@ public final class ElytraModule implements FlexModule {
         } catch (LinkageError olderCore) {
             context.log().info("RainsCore is older than 2.34.0: the elytra looks are only in /elytra.");
         }
-        context.log().info("Elytra is up: {} trim recipes take an elytra or horse armour, {} chestplate looks and {} dog armour looks ({}).",
+        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks and {} dog armour looks ({}).",
                 trims, ElytraLook.values().length, de.raindancer.modules.elytra.look.DogLook.values().length, settings.current().primeOnly() ? "Prime only" : "for everybody");
     }
 

@@ -22,9 +22,11 @@ public record ElytraSettings(
         @Key("prime-only")
         boolean primeOnly,
 
-        @In("elytra") @Title("Fastest glide (blocks per second)") @Range(min = 0, max = 200)
-        @Describe("Nobody glides faster than this — rockets, diving and boosts included; anything faster is slowed to it "
-                + "in the same direction. Vanilla tops out around 33 with rockets. 0: no limit.")
+        @In("elytra") @Title("Fastest flight (blocks per second)") @Range(min = 0, max = 200)
+        @Describe("Nobody flies an elytra faster than this, diving and rockets included. Smooth: while gliding gravity is "
+                + "scaled so the steepest dive tops out here (every glide angle stays the same, just slower), and a rocket "
+                + "pushes at this speed along the look while it burns. Vanilla tops out at about 78 diving, 33 with rockets. "
+                + "0: vanilla.")
         @Key("max-speed")
         int maxSpeed) {
 

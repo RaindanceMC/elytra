@@ -26,7 +26,7 @@
         <!-- 0.1.0: armour trims on elytra at the smithing table (the wings show them, with the pack Core sends);
              chestplate looks for elytra in /elytra and on the cosmetics page, a Prime perk while
                     prime-only is on (the default). -->
-        <plugin.version>0.7.0</plugin.version>
+        <plugin.version>0.8.0</plugin.version>
     </properties>
 
     <dependencies>
