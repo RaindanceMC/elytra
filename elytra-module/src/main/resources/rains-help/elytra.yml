@@ -1,5 +1,5 @@
 id: elytra
-title: Elytra & dog looks
+title: Elytra
 summary: Put an armour trim on your elytra at a smithing table, and give it a chestplate look with /elytra.
 intro: |
   Your wings deserve a little flair too. Trims go on exactly like they do on armour, and a chestplate look lets your elytra show off a diamond or netherite chestplate — only as a look.
@@ -8,7 +8,7 @@ category: Items & enchantments
 order: 45
 module: elytra
 aliases: [elytra, wings, elytralook, elytra-trims, elytra-looks]
-keywords: [elytra, wings, speed, rocket, firework, trim, trims, smithing, template, chestplate, look, cosmetic, dog, wolf, dog armour, wolf armor]
+keywords: [elytra, wings, speed, rocket, firework, trim, trims, smithing, template, chestplate, look, cosmetic]
 commands: [elytra]
 sections:
   - question: How do I put a trim on my elytra?
@@ -26,9 +26,3 @@ sections:
       Hold or wear your elytra and type {run:/elytra}. Pick leather, chainmail, copper, iron, gold, diamond or netherite, and your wings are drawn with that chestplate. {cmd:/elytra look none} takes it off again.
       It is only a look: the elytra protects exactly like an elytra, not like the chestplate it shows. A trim shows on the chestplate part too.
       {if:elytra:prime-only}Putting a look on is a <light_purple>Prime</light_purple> perk; everybody can look at them in the menu and take one off.{/if}
-  - question: Can my dog look fancy too?
-    title: Dog armour looks
-    text: |
-      Hold dog armour and type {run:/elytra dog}. Pick leather, copper, iron, gold, diamond, netherite or gilded netherite, then put the armour on your dog: it wears that look. {cmd:/elytra dog none} takes it off again.
-      It is only a look: the armour protects and wears out like any dog armour, and leather still takes a dye.
-      {if:elytra:prime-only}Putting a look on is a <light_purple>Prime</light_purple> perk. When Prime ends, the looks come off your elytra and your dogs' armour by themselves; trims always stay.{/if}

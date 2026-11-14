@@ -130,21 +130,4 @@ class ElytraPackTest {
         assertThat(ROOT.resolve("licenses/GPL-3.0.txt")).content().contains("GNU GENERAL PUBLIC LICENSE");
         assertThat(ROOT.resolve("CREDITS.txt")).content().contains("Elytra Trims").contains("KikuGie");
     }
-
-    @Test
-    @DisplayName("every dog look is a wolf body equipment asset whose textures are in the pack, LGPL text beside them")
-    void dogLooksInThePack() throws IOException {
-        for (de.raindancer.modules.elytra.look.DogLook look : de.raindancer.modules.elytra.look.DogLook.values()) {
-            JsonObject equipment = json("assets/rainselytra/equipment/dog_" + look.id() + ".json");
-            var layers = equipment.getAsJsonObject("layers").getAsJsonArray("wolf_body");
-            assertThat(layers).as(look.id()).isNotEmpty();
-            for (var layer : layers) {
-                String texture = layer.getAsJsonObject().get("texture").getAsString().replace("rainselytra:", "");
-                assertThat(ROOT.resolve("assets/rainselytra/textures/entity/equipment/wolf_body/" + texture + ".png"))
-                        .as(look.id()).isRegularFile();
-            }
-        }
-        assertThat(ROOT.resolve("licenses/LGPL-2.1.txt")).content().contains("LESSER GENERAL PUBLIC LICENSE");
-        assertThat(ROOT.resolve("CREDITS.txt")).content().contains("Metal Wolf Solid").contains("More Wolf Armors");
-    }
 }

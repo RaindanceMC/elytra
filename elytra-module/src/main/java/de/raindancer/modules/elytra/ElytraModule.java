@@ -22,7 +22,7 @@ import java.util.List;
  */
 public final class ElytraModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.8.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("elytra", "Elytra", "0.9.0")
             .describedAs("Armour trims on elytra, and chestplate looks for them with /elytra")
             .by("Raindancer118");
 
@@ -81,14 +81,11 @@ public final class ElytraModule implements FlexModule {
             de.raindancer.core.ui.cosmetic.CosmeticDoor door = new ElytraLooksDoor(live);
             de.raindancer.core.ui.cosmetic.CosmeticDoors.provide(context.plugin(), door);
             context.closeWith(() -> de.raindancer.core.ui.cosmetic.CosmeticDoors.retract(door));
-            de.raindancer.core.ui.cosmetic.CosmeticDoor dogs = new de.raindancer.modules.elytra.look.DogLooksDoor(live);
-            de.raindancer.core.ui.cosmetic.CosmeticDoors.provide(context.plugin(), dogs);
-            context.closeWith(() -> de.raindancer.core.ui.cosmetic.CosmeticDoors.retract(dogs));
         } catch (LinkageError olderCore) {
             context.log().info("RainsCore is older than 2.34.0: the elytra looks are only in /elytra.");
         }
-        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks and {} dog armour looks ({}).",
-                trims, ElytraLook.values().length, de.raindancer.modules.elytra.look.DogLook.values().length, settings.current().primeOnly() ? "Prime only" : "for everybody");
+        context.log().info("Elytra is up: {} trim recipes take an elytra, {} chestplate looks ({}).",
+                trims, ElytraLook.values().length, settings.current().primeOnly() ? "Prime only" : "for everybody");
     }
 
     @Override

@@ -3,14 +3,6 @@ https://modrinth.com/mod/elytra-trims, source https://codeberg.org/KikuGie/elytr
 Licensed under the GNU Lesser General Public License v3.0 or later: licenses/elytra-trims-LGPL-3.0.txt,
 with the GNU General Public License v3.0 it extends: licenses/GPL-3.0.txt.
 
-Dog armour looks (textures/entity/equipment/wolf_body/dog_*.png), unchanged:
-- leather, copper, iron, gold, diamond, netherite: "Metal Wolf Solid: Wolf Armor & Stand" by LOREal,
-  https://modrinth.com/mod/metal-wolf-solid-wolf-armor, source https://gitlab.com/LOREal_mods/mc-mws-wolf-armor-and-stand,
-  GNU Lesser General Public License v2.1 or later.
-- gilded: the netherite wolf armour of "More Wolf Armors", https://modrinth.com/mod/more-wolf-armors,
-  source https://github.com/Minecraft-LightLand/More-Wolf-Armors, GNU Lesser General Public License v2.1.
-  Licence text: licenses/LGPL-2.1.txt.
-
 The elytra trim overlay (textures/trims/items/wings_trim.png): "Bare Bones X Elytra Trims" by rando3214,
 https://modrinth.com/resourcepack/bare-bones-x-elytra-trims — BSD 2-Clause License:
 

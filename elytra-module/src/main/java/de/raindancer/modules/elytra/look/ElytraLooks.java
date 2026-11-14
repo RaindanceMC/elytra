@@ -43,7 +43,7 @@ public final class ElytraLooks {
     }
 
     /**
-     * Takes the look off every elytra and dog armour in an inventory — worn, in hand or packed away — for somebody no longer allowed
+     * Takes the look off every elytra in an inventory — worn, in hand or packed away — for somebody no longer allowed
      * one (Prime ended, or handed a styled elytra).
      *
      * @return how many came off
@@ -56,11 +56,6 @@ public final class ElytraLooks {
             if (lookOf(item).isPresent()) {
                 ItemStack plain = item.clone();
                 wear(plain, null);
-                inventory.setItem(slot, plain);
-                off++;
-            } else if (DogLooks.lookOf(item).isPresent()) {
-                ItemStack plain = item.clone();
-                DogLooks.wear(plain, null);
                 inventory.setItem(slot, plain);
                 off++;
             }
