@@ -38,7 +38,6 @@ public final class ElytraModule implements FlexModule {
         Server server = context.plugin().getServer();
         context.core().messages().defineFrom(ElytraModule.class.getResourceAsStream("messages.yml"),
                 context.chat().brand()::chatPrefix);
-        context.core().messages().seriousFrom(ElytraModule.class.getResourceAsStream("messages-serious.yml"));
         PermissionNodes.register(server);
         SettingsStore<ElytraSettings> settings = context.settings(ElytraSettings.class, ElytraSettings.DEFAULTS);
         PrimeGate.apply(server.getPluginManager(), settings.current().primeOnly());
