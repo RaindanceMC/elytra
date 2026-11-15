@@ -59,7 +59,7 @@ public final class ElytraModule implements FlexModule {
             limit.stop();
         });
         if (trims == 0 || !recipes.allPresent()) {
-            context.log().warn("No trim recipe for elytra is in the server's recipes ({} added) — the smithing "
+            context.log().warn("No trim recipe for elytra is in the server's recipes ({} added), so the smithing "
                     + "table will not take an elytra.", trims);
         }
 
@@ -93,7 +93,7 @@ public final class ElytraModule implements FlexModule {
         return List.of(ModuleCommand.of("elytra", "Picks a chestplate look for your elytra",
                         new ElytraCommand(ElytraModule::require))
                 .aliased("elytralook", "wings")
-                .taking("(nothing) — pick a look", "look <name> — put one on", "look none — plain wings again"));
+                .taking("(nothing): pick a look", "look <name>: put one on", "look none: plain wings again"));
     }
 
     @Override

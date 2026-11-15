@@ -50,11 +50,11 @@ public final class PrimeGate {
             return found;
         }
         Permission made = switch (name) {
-            case PRIME -> new Permission(PRIME, "Holds the Prime subscription — given and taken by RainsCore",
+            case PRIME -> new Permission(PRIME, "Holds the Prime subscription. Given and taken by RainsCore",
                     PermissionDefault.FALSE);
             case COSMETICS_FREE -> new Permission(COSMETICS_FREE,
                     "Use every cosmetic that is for sale without buying it", PermissionDefault.OP);
-            default -> new Permission(COSMETICS_PERKS, "Prime-only cosmetics without Prime — staff",
+            default -> new Permission(COSMETICS_PERKS, "Prime-only cosmetics without Prime (staff)",
                     PermissionDefault.OP);
         };
         try {

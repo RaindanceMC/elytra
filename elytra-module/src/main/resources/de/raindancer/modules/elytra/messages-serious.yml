@@ -1,3 +1,1 @@
-# The serious wording for this module: only the lines that differ from messages.yml.
-elytra:
-  look-on: "<green>Elytra look set: <white><look></white> chestplate. It does not change the armour value."
+# One tone only: messages.yml already says everything plainly. This file stays empty because the wording contract still expects it.

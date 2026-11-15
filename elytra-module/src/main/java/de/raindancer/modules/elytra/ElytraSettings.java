@@ -16,7 +16,7 @@ import org.bukkit.Material;
 public record ElytraSettings(
 
         @In("elytra") @Title("Chestplate looks for Prime only")
-        @Describe("Whether the chestplate looks are a Prime perk — Prime members, staff and whoever has free "
+        @Describe("Whether the chestplate looks are a Prime perk. Prime members, staff and whoever has free "
                 + "cosmetics may put one on; everybody may still look at them and take one off. Off, they are "
                 + "everybody's (rainselytra.looks).")
         @Key("prime-only")

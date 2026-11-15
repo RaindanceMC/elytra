@@ -2,7 +2,7 @@ id: elytra
 title: Elytra
 summary: Put an armour trim on your elytra at a smithing table, and give it a chestplate look with /elytra.
 intro: |
-  Your wings deserve a little flair too. Trims go on exactly like they do on armour, and a chestplate look lets your elytra show off a diamond or netherite chestplate — only as a look.
+  Trims go on an elytra like they do on armour. A chestplate look makes your elytra show a chestplate, for example diamond or netherite. It is only a look.
 icon: ELYTRA
 category: Items & enchantments
 order: 45
@@ -19,7 +19,7 @@ sections:
   - question: How fast can I fly?
     title: Speed
     text: |
-      {if:elytra:max-speed}Elytra fly at most {setting:elytra:max-speed} blocks a second here, diving or with rockets. Gliding works as always, just a little gentler: every angle glides the same, only slower. A rocket pushes you along where you look for as long as it burns.{else}As fast as the game lets you: there is no limit here.{/if}
+      {if:elytra:max-speed}Elytra fly at most {setting:elytra:max-speed} blocks a second here, diving or with rockets. Gliding works as usual, but every angle glides the same, only slower. A rocket pushes you along where you look for as long as it burns.{else}There is no speed limit here.{/if}
   - question: How do I get a chestplate look on my elytra?
     title: Chestplate looks
     text: |
