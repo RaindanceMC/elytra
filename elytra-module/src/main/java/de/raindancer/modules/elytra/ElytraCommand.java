@@ -30,7 +30,7 @@ public final class ElytraCommand implements BasicCommand {
             return;
         }
         if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("look"))) {
-            new LooksMenu(live, player, null).open();
+            new LooksMenu(live, player, backTo(player)).open();
             return;
         }
         if (args.length != 2 || !args[0].equalsIgnoreCase("look")) {
@@ -58,5 +58,14 @@ public final class ElytraCommand implements BasicCommand {
         }
         String typed = args.length == 0 ? "" : args[args.length - 1].toLowerCase(Locale.ROOT);
         return options.stream().filter(option -> option.startsWith(typed)).toList();
+    }
+
+    /** The cosmetics page when the server has one, so Back leads to everything else worn (Core 2.102.0). */
+    private static de.raindancer.core.ui.menu.Menu backTo(Player player) {
+        try {
+            return de.raindancer.core.ui.cosmetic.CosmeticDoors.backTo(player, null);
+        } catch (LinkageError olderCore) {
+            return null;
+        }
     }
 }
