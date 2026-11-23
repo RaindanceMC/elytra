@@ -32,7 +32,7 @@ public record ElytraServices(Messages messages, Brand brand, BooleanSupplier pri
         }
     }
 
-    /** Puts {@code look} (null: none) on the player's elytra and tells them. */
+    /** Puts {@code look} (null: none) on the player's elytra; a look on is told, plain wings are seen. */
     public void wear(Player player, ElytraLook look) {
         Optional<ElytraLooks.Slot> slot = ElytraLooks.find(player);
         if (slot.isEmpty()) {
@@ -48,9 +48,7 @@ public record ElytraServices(Messages messages, Brand brand, BooleanSupplier pri
             return;
         }
         ElytraLooks.apply(player, look);
-        if (look == null) {
-            messages.send(player, "elytra.look-off");
-        } else {
+        if (look != null) {
             messages.send(player, "elytra.look-on", "look", look.title());
         }
     }

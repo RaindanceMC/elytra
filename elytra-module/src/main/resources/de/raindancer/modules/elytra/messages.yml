@@ -1,7 +1,6 @@
 # This module's wording. Every line can be rewritten in plugins/RainsCore/messages.yml.
 elytra:
   look-on: "<green>Elytra look set: <white><look></white> chestplate. It does not change the armour value."
-  look-off: "<green>Your elytra has plain wings again."
   already: "<gray>Your elytra already looks like that."
   hold-one: "<red>Hold an elytra, or wear one, to change how it looks."
   unknown-look: "<red>There is no look called <white><typed></white>. These are: <white><looks></white>, or <white>none</white>."
